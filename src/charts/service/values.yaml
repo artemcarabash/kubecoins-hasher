@@ -1,0 +1,4 @@
+replicaCount: 2
+image: docker.informatik.hs-furtwangen.de/cnc-carabasa/hasher
+author: carabasa
+name: hasher

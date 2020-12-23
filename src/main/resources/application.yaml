@@ -1,1 +1,11 @@
-
+server:
+  servlet:
+    context-path: /carabasa
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "info, health, prometheus"
+  metrics:
+    tags:
+      application: hasher-carabasa

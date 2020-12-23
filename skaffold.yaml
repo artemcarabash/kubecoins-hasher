@@ -1,0 +1,17 @@
+apiVersion: skaffold/v2beta8
+kind: Config
+metadata:
+  name: hasher-carabasa
+build:
+  artifacts:
+    - image: docker.informatik.hs-furtwangen.de/cnc-carabasa/hasher
+      jib:
+        args:
+          - -Dmaven.test.skip=true
+deploy:
+  helm:
+    releases:
+      - name: hasher-carabasa
+        chartPath: src/charts/service
+        artifactOverrides:
+          image: docker.informatik.hs-furtwangen.de/cnc-carabasa/hasher
