@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class HasherApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Hasher.class, args);
+        SpringApplication.run(HasherApplication.class, args);
     }
 
 }

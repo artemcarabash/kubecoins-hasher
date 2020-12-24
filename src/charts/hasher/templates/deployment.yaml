@@ -13,7 +13,6 @@ spec:
       author: {{ .Values.author }}
   template:
     metadata:
-      name:  {{ .Values.name }}-{{.Values.author }}
       labels:
         app: {{ .Values.name }}
         author: {{.Values.author }}
@@ -29,10 +28,10 @@ spec:
           livenessProbe:
             initialDelaySeconds: 15
             httpGet:
-              path: /{{ .Values.author }}/actuator/health/liveness
+              path: /{{ .Values.name }}-{{ .Values.author }}/actuator/health/liveness
               port: 8080
           readinessProbe:
             initialDelaySeconds: 15
             httpGet:
-              path: /{{ .Values.author }}/actuator/health/readiness
+              path: /{{ .Values.name }}-{{ .Values.author }}/actuator/health/readiness
               port: 8080

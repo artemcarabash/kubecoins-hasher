@@ -1,14 +1,14 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{ .Values.name }}monitor-{{ .Values.author }}
+  name: hashermonitor-{{ .Values.author }}
   labels:
     app: {{ .Values.name }}
     author: {{ .Values.author }}
 spec:
   endpoints:
     - interval: 30s
-      path: /{{ .Values.author }}/actuator/prometheus
+      path: /{{ .Values.name }}-{{ .Values.author }}/actuator/prometheus
       port: web
   selector:
     matchLabels:

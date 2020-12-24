@@ -1,6 +1,6 @@
 server:
   servlet:
-    context-path: /carabasa
+    context-path: /hasher-carabasa
 management:
   endpoints:
     web:
