@@ -1,26 +1,33 @@
+# Manifestdatei für Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Values.name }}-{{.Values.author }}
+  # labels für Deployment um Ressourcen zu kennzeichen
   labels:
     app: {{ .Values.name }}
     author: {{.Values.author }}
 spec:
+  # Anzahl von Pods die gestartet werden sollten
   replicas: {{.Values.replicaCount }}
+  # So findet das Deployment seine zugehörige Pods
   selector:
     matchLabels:
       app: {{ .Values.name }}
       author: {{ .Values.author }}
+  # So sollte ein Pod aussehen wenn es wird von Deployment erstellt
   template:
     metadata:
       labels:
         app: {{ .Values.name }}
         author: {{.Values.author }}
     spec:
+      # Welche Image sollte genutzt werden um ein Pod zu erstellen
       containers:
         - name: {{ .Values.name }}-{{.Values.author }}
           image: {{ .Values.image }}
           resources:
+            # maximal erlaubten CPU und Memory Werte werden hier definiert
             limits:
               memory: 256Mi
             requests:
@@ -28,10 +35,14 @@ spec:
           livenessProbe:
             initialDelaySeconds: 15
             httpGet:
+              #aufzurufende Seite um liveness Statuss zu überprüfen
               path: /{{ .Values.name }}-{{ .Values.author }}/actuator/health/liveness
+              #verwendende Container-Port
               port: 8080
           readinessProbe:
             initialDelaySeconds: 15
             httpGet:
+              #aufzurufende Seite um readiness Statuss zu überprüfen
               path: /{{ .Values.name }}-{{ .Values.author }}/actuator/health/readiness
+              #verwendende Container-Port
               port: 8080
